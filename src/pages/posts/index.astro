@@ -1,0 +1,21 @@
+---
+import BaseLayout from "src/layouts/BaseLayout.astro"
+import { getTaxonomy } from "src/utils/getTaxonomy"
+
+import { getSinglePage } from "src/utils/libs/getSinglePage"
+
+const posts = await getSinglePage("posts");
+const tags = await getTaxonomy("posts", "tags");
+---
+
+<BaseLayout title="posts" description="">
+  {
+    posts &&
+      posts.map((post: any) => (
+        <a href={`/posts/${post.slug}`}>
+          {post.data.title}
+        </a>
+      ))
+  }
+
+</BaseLayout>

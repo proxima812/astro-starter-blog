@@ -1,0 +1,50 @@
+---
+import { customSlugify } from "@/utils/libs/customSlugify";
+import FormattedDate from "./FormattedDate.astro";
+const { data, slug } = Astro.props;
+---
+
+<article role="article" class="bg-gray-100 p-2">
+  <a href={`/posts/${slug}`}>
+    <object type="owo/uwu">
+      <div class="flex flex-col gap-1">
+        <h2><a href={`/posts/${slug}`}>{data.title}</a></h2>
+        <p>{data.description}</p>
+        <FormattedDate date={data.pubDate} />
+        <div aria-label="Теги">
+          <span>Теги:</span>
+          {
+            data.tags &&
+              data.tags.map((tag) => (
+                <a href={`/tags/${customSlugify(tag)}`}>{tag}</a>
+              ))
+          }
+        </div>
+        <div aria-label="Категории">
+          <span>Категории:</span>
+          {
+            data.categories &&
+              data.categories
+                .slice(0, 1)
+                .map((category) => (
+                  <a href={`/categories/${customSlugify(category)}`}>
+                    {category}
+                  </a>
+                ))
+          }
+        </div>
+        <div aria-label="Авторы">
+          <span>Авторы:</span>
+          {
+            data.authors &&
+              data.authors
+                .slice(0, 1)
+                .map((author) => (
+                  <a href={`/authors/${customSlugify(author)}`}>{author}</a>
+                ))
+          }
+        </div>
+      </div>
+    </object>
+  </a>
+</article>

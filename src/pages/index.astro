@@ -1,0 +1,13 @@
+---
+import PostCard from "@/components/PostCard.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getSinglePage } from "@/utils/libs/getSinglePage";
+
+const posts = await getSinglePage("posts");
+---
+
+<BaseLayout title="title" description="description">
+  <div class="grid grid-cols-3 gap-3">
+    {posts.map((item: any) => <PostCard slug={item.slug} data={item.data} />)}
+  </div>
+</BaseLayout>

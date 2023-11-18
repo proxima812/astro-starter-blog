@@ -1,0 +1,20 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getTaxonomy } from "src/utils/getTaxonomy";
+import { customSlugify } from "src/utils/libs/customSlugify";
+
+const categories = await getTaxonomy("posts", "authors");
+---
+
+<BaseLayout title="" description="">
+  <ul>
+    {
+      categories &&
+        categories.map((author) => (
+          <li>
+            <a href={`/authors/${customSlugify(author)}`}>{author}</a>
+          </li>
+        ))
+    }
+  </ul>
+</BaseLayout>

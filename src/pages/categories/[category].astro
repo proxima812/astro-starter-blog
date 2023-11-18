@@ -1,0 +1,32 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { customSlugify } from "@/utils/libs/customSlugify";
+import { getTaxonomy } from "src/utils/getTaxonomy";
+import { getSinglePage } from "src/utils/libs/getSinglePage";
+import taxonomyFilter from "src/utils/libs/taxonomyFilter";
+
+export async function getStaticPaths() {
+  const categories = await getTaxonomy("posts", "categories");
+
+  return categories.map((category) => {
+    return {
+      params: { category: customSlugify(category) },
+    };
+  });
+}
+
+const { category } = Astro.params;
+
+const posts = await getSinglePage("posts");
+const filterByTags = taxonomyFilter(posts, "categories", category);
+
+const title = `Постов (${filterByTags.length})`;
+---
+
+<BaseLayout title={title} description="">
+  {
+    filterByTags.map((post) => (
+      <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+    ))
+  }
+</BaseLayout>

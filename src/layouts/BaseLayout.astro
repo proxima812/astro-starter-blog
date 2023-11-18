@@ -1,0 +1,17 @@
+---
+import "@/styles/global.css";
+
+import SEOTags from "@/components/seo/SEOTags.astro";
+import type { HeadTags } from "@/utils/types/HeadTags";
+export type Props = HeadTags;
+const headTags = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru" class="scroll-smooth">
+  <SEOTags {...headTags} />
+
+  <body>
+    <slot />
+  </body>
+</html>
