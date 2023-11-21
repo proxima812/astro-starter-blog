@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from "astro/types";
+type Props = HTMLAttributes<"a">;
+
+const { href, class: className, ...props } = Astro.props;
+
+const { pathname } = Astro.url;
+const isActive = href === pathname || href === pathname.replace(/\/$/, "");
+---
+
+<a
+  href={href}
+  class:list={`${isActive ? "bg-gray-500" : "bg-gray-50"} ${className}`}
+  rel="noopener noreferrer"
+  {...props}
+>
+  <slot />
+</a>

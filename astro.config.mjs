@@ -10,5 +10,6 @@ import { SITE_URL } from "./src/config/settings";
 export default defineConfig({
   site: SITE_URL,
   prefetch: true,
+  compressHTML: true,
   integrations: [tailwind(), sitemap(), mdx(), react()],
 });

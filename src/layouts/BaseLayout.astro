@@ -3,6 +3,7 @@ import "@/styles/global.css";
 
 import SEOTags from "@/components/seo/SEOTags.astro";
 import type { HeadTags } from "@/utils/types/HeadTags";
+import { ViewTransitions } from "astro:transitions";
 export type Props = HeadTags;
 const headTags = Astro.props;
 ---
@@ -10,8 +11,9 @@ const headTags = Astro.props;
 <!doctype html>
 <html lang="ru" class="scroll-smooth">
   <SEOTags {...headTags} />
-
+  <ViewTransitions fallback="swap"/>
   <body>
     <slot />
+    
   </body>
 </html>

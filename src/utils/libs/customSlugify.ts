@@ -15,4 +15,3 @@ export const customSlugify = (content) => {
     return slug(content);
   }
 };
-
