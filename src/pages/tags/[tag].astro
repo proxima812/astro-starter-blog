@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { customSlugify } from "@/utils/libs/customSlugify";
 import { getTaxonomy } from "src/utils/getTaxonomy";
 import { getSinglePage } from "src/utils/libs/getSinglePage";
 import taxonomyFilter from "src/utils/libs/taxonomyFilter";
@@ -9,7 +10,7 @@ export async function getStaticPaths() {
 
   return tags.map((tag) => {
     return {
-      params: { tag },
+      params: { tag: customSlugify(tag) },
     };
   });
 }

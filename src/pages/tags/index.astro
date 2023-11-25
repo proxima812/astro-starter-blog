@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { customSlugify } from '@/utils/libs/customSlugify'
 import { getTaxonomy } from "src/utils/getTaxonomy";
 
 const tags = await getTaxonomy("posts", "tags");
@@ -11,7 +12,7 @@ const tags = await getTaxonomy("posts", "tags");
       tags &&
         tags.map((tag) => (
           <li>
-            <a class="text-3xl text-blue-500" href={`/tags/${tag}`}>
+            <a class="text-3xl text-blue-500" href={`/tags/${customSlugify(tag)}`}>
               {tag}
             </a>
           </li>
